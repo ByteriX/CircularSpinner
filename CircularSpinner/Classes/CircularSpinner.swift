@@ -133,7 +133,11 @@ open class CircularSpinner: UIView {
     }
     
     fileprivate func loadViewFromNib() -> UIView {
+#if SWIFT_PACKAGE
+        let bundle = Bundle.module
+#else
         let bundle = Bundle(for: Swift.type(of: self))
+#endif
         let nib = UINib(nibName: nibName, bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
         return view
